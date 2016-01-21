@@ -3,6 +3,7 @@ import sys
 
 from pygame.locals import *
 
+from constants import *
 
 def init():
     pygame.init()
