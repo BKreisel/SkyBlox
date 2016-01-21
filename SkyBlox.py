@@ -4,19 +4,22 @@ import sys
 from pygame.locals import *
 
 from constants import *
+from render import *
 
 def init():
     pygame.init()
-    pygame.draw.rect(surface, (255,255,255), (15, 30,400,640), 2)
+    surface = pygame.display.set_mode((650, 700))
     pygame.display.set_caption('SkyBlox')
     pygame.time.set_timer(USEREVENT+1, 1000)
+    return surface
 
 
 def main():
     seconds = 0
     clock = pygame.time.Clock()
 
-    init()
+    surface = init()
+    render_board(surface)
 
     while True:
         for event in pygame.event.get():
