@@ -6,26 +6,16 @@ from pygame.locals import *
 
 def init():
     pygame.init()
-    surface = pygame.display.set_mode((600, 700))
     pygame.draw.rect(surface, (255,255,255), (15, 30,400,640), 2)
     pygame.display.set_caption('SkyBlox')
     pygame.time.set_timer(USEREVENT+1, 1000)
 
-def gameLoop(board):
-
-
-    #Move Block
-    #Process
-
-    print("Test")
 
 def main():
     seconds = 0
     clock = pygame.time.Clock()
 
     init()
-
-    board = []
 
     while True:
         for event in pygame.event.get():
