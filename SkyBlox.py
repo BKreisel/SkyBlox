@@ -9,6 +9,7 @@ def init():
     surface = pygame.display.set_mode((600, 700))
     pygame.draw.rect(surface, (255,255,255), (15, 30,400,640), 2)
     pygame.display.set_caption('SkyBlox')
+    pygame.time.set_timer(USEREVENT+1, 1000)
 
 def gameLoop(board):
 
@@ -19,8 +20,8 @@ def gameLoop(board):
     print("Test")
 
 def main():
-    FPS = 30
-    fpsClock = pygame.time.Clock()
+    seconds = 0
+    clock = pygame.time.Clock()
 
     init()
 
@@ -32,8 +33,12 @@ def main():
                 pygame.quit()
                 sys.exit()
 
+            if event.type == USEREVENT + 1:
+                seconds += 1
+                print(seconds)
+
         pygame.display.update()
-        fpsClock.tick(FPS)
+        clock.tick(30)
 
 if __name__ == "__main__":
     main()
