@@ -59,7 +59,9 @@ def set_next_block_disp(surface,tetromino=None):
 
 def game_border(surface):
     pygame.draw.rect(surface, WHITE,
-        (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER, 400, 640),
+        (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER,
+         BOARD_WIDTH + BOARD_BORDER + BOARD_BORDER / 2,
+         BOARD_HEIGHT + BOARD_BORDER + BOARD_BORDER / 2),
          BOARD_BORDER)
 
 def render_screen(surface):
@@ -86,8 +88,13 @@ def render_block(surface, row, col, block, isClear = False):
         for piece in line:
             if piece != 0:
                 pygame.draw.rect(surface, color,
-                    (BOARD_START_X + (col + block_col) *BLOCK_SIZE,
+                    (BOARD_START_X + (col + block_col) * BLOCK_SIZE,
                     BOARD_START_Y + (row + block_line) * BLOCK_SIZE,
                     BLOCK_SIZE, BLOCK_SIZE))
             block_col += 1
         block_line += 1
+
+def render_gameboard(surface, field):
+    pygame.draw.rect(surface, BLACK, (BOARD_START_X, BOARD_START_Y, 400, 640))
+
+    render_block(surface, field.block_y, field.block_x, field.tetromino)

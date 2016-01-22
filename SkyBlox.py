@@ -1,11 +1,12 @@
 import pygame
 import sys
-from block import Block
+
 
 from pygame.locals import *
 
 from constants import *
 from render import *
+from gameboard import Gameboard
 
 def init():
     pygame.init()
@@ -14,22 +15,20 @@ def init():
     pygame.time.set_timer(USEREVENT+1, 1000)
     return surface
 
-def control_block(event, surface, tetromino,t_row,t_col):
+def control_block(event, surface, board):
     if event.key == K_UP or event.key == K_w:
-        render_block(surface, t_row, t_col, tetromino, True)
-        tetromino.rotate(ROTATE_DIR)
-        render_block(surface, t_row, t_col, tetromino)
-        print("Orientation: " + str(tetromino.orientation))
-        print("Up")
-    elif event.key == K_RIGHT or event.key == K_d:
-        print("Right")
-    elif event.key == K_DOWN or event.key == K_s:
-        print("Down")
-        render_block(surface, t_row, t_col, tetromino, True)
-        render_block(surface, t_row+1, t_col, tetromino)
-    elif event.key == K_LEFT or event.key == K_a:
-        print("Left")
+        board.tetromino.rotate(ROTATE_DIR)
 
+    elif event.key == K_RIGHT or event.key == K_d:
+        board.move_block(RIGHT)
+
+    elif event.key == K_DOWN or event.key == K_s:
+        board.block_fall()
+
+    elif event.key == K_LEFT or event.key == K_a:
+        board.move_block(LEFT)
+
+    render_gameboard(surface, board)
 
 def main():
     seconds = 0
@@ -37,12 +36,10 @@ def main():
 
     surface = init()
     render_screen(surface)
+    board = Gameboard(BLOCK_I)
+    render_gameboard(surface,board)
 
-    #create a block
-    tetromino = Block(BLOCK_I, 0)
     set_next_block_disp(surface,BLOCK_T)
-    t_row = 0
-    t_col = BOARD_COLS / 2
 
     while True:
         for event in pygame.event.get():
@@ -52,13 +49,13 @@ def main():
 
             if event.type == USEREVENT + 1:
                 seconds += 1
-                render_block(surface, t_row, t_col,tetromino, True)
-                t_row += 1
-                render_block(surface, t_row, t_col, tetromino)
+                board.block_fall()
+                render_gameboard(surface, board)
 
                 print(seconds)
 
             if event.type == KEYDOWN:
+                '''
                 #Temporary code to test the block rotation
                 if event.key == K_1:
                     render_block(surface, 5, 4, tetromino, True)
@@ -88,8 +85,9 @@ def main():
                     render_block(surface, 5, 4, tetromino, True)
                     tetromino = Block(BLOCK_S, 0)
                     render_block(surface, 5, 4, tetromino)
+                '''
 
-                control_block(event, surface, tetromino,t_row,t_col)
+                control_block(event, surface, board)
 
         pygame.display.update()
         clock.tick(30)
