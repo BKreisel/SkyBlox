@@ -7,6 +7,7 @@ from pygame.locals import *
 from constants import *
 from render import *
 from gameboard import Gameboard
+from blockpicker import BlockPicker
 
 def init():
     pygame.init()
@@ -32,14 +33,14 @@ def control_block(event, surface, board):
 
 def main():
     seconds = 0
-    clock = pygame.time.Clock()
-
     surface = init()
-    render_screen(surface)
-    board = Gameboard(BLOCK_I)
-    render_gameboard(surface,board)
 
-    set_next_block_disp(surface,BLOCK_T)
+    clock = pygame.time.Clock()
+    picker = BlockPicker(surface)
+
+    render_screen(surface)
+    board = Gameboard(picker.get_current())
+    render_gameboard(surface,board)
 
     while True:
         for event in pygame.event.get():
