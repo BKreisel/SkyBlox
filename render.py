@@ -9,14 +9,16 @@ def render_title(surface):
     surface.blit(title_sky,(430,30))
     surface.blit(title_blox,(494,100))
 
-def block_box(surface):
-    pygame.draw.rect(surface, WHITE, (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER, 400, 640), BOARD_BORDER)
+def game_border(surface):
+    pygame.draw.rect(surface, WHITE,
+        (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER, 400, 640),
+         BOARD_BORDER)
 
 def render_board(surface):
 
     items = [
         render_title
-        ,block_box
+        ,game_border
     ]
 
     for item in items:
@@ -33,6 +35,9 @@ def render_block(surface, row, col, block, isClear = False):
         block_col = 0
         for piece in line:
             if piece != 0:
-                pygame.draw.rect(surface, color, (BOARD_START_X + (col + block_col) *BLOCK_SIZE, BOARD_START_Y + (row + block_line) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE))
+                pygame.draw.rect(surface, color,
+                    (BOARD_START_X + (col + block_col) *BLOCK_SIZE,
+                    BOARD_START_Y + (row + block_line) * BLOCK_SIZE,
+                    BLOCK_SIZE, BLOCK_SIZE))
             block_col += 1
         block_line += 1
