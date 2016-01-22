@@ -1,6 +1,6 @@
 import pygame
 import sys
-from block import block
+from block import Block
 
 from pygame.locals import *
 
@@ -39,7 +39,7 @@ def main():
     render_screen(surface)
 
     #create a block
-    tetromino = block(BLOCK_I, 0)
+    tetromino = Block(BLOCK_I, 0)
     t_row = 0
     t_col = BOARD_COLS / 2
 
@@ -61,31 +61,31 @@ def main():
                 #Temporary code to test the block rotation
                 if event.key == K_1:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_T, 0)
+                    tetromino = Block(BLOCK_T, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_2:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_I, 0)
+                    tetromino = Block(BLOCK_I, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_3:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_L, 0)
+                    tetromino = Block(BLOCK_L, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_4:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_R, 0)
+                    tetromino = Block(BLOCK_R, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_5:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_O, 0)
+                    tetromino = Block(BLOCK_O, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_6:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_Z, 0)
+                    tetromino = Block(BLOCK_Z, 0)
                     render_block(surface, 5, 4, tetromino)
                 if event.key == K_7:
                     render_block(surface, 5, 4, tetromino, True)
-                    tetromino = block(BLOCK_S, 0)
+                    tetromino = Block(BLOCK_S, 0)
                     render_block(surface, 5, 4, tetromino)
 
                 control_block(event, surface, tetromino,t_row,t_col)

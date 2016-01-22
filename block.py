@@ -1,4 +1,4 @@
-class block:
+class Block:
     def __init__(self, shape = [], orientation = 0):
         print("New Block Created")
         self.shape = shape
