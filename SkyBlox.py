@@ -36,7 +36,7 @@ def main():
     clock = pygame.time.Clock()
 
     surface = init()
-    render_board(surface)
+    render_screen(surface)
 
     #create a block
     tetromino = block(BLOCK_I, 0)

@@ -14,7 +14,7 @@ def game_border(surface):
         (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER, 400, 640),
          BOARD_BORDER)
 
-def render_board(surface):
+def render_screen(surface):
 
     items = [
         render_title
