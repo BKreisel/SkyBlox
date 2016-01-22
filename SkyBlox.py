@@ -40,6 +40,7 @@ def main():
 
     #create a block
     tetromino = Block(BLOCK_I, 0)
+    set_next_block_disp(surface,BLOCK_T)
     t_row = 0
     t_col = BOARD_COLS / 2
 

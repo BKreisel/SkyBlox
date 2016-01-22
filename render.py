@@ -35,6 +35,28 @@ def set_game_info(surface,level_val=1,score_val=0,lines_val=0):
     pygame.draw.rect(surface,BLACK,(430,600,cover_x(lines_text),font_size+3))
     surface.blit(lines,(430,600))
 
+def set_next_block_disp(surface,tetromino=None):
+    font_size = 32
+    font = pygame.font.Font("assets/fonts/Exo-BoldItalic.otf",font_size)
+    next_text = font.render("Next Block",True,WHITE)
+    surface.blit(next_text,(430,250))
+
+    if tetromino:
+        pygame.draw.rect(surface,BLACK,(450,300,BLOCK_SIZE*4,BLOCK_SIZE*2))
+        row = -1
+        for line in tetromino[0]:
+            row += 1
+            col = -1
+            for cell in line:
+                col += 1
+                if cell == 1:
+                    cell_coords = (
+                        450 + (col*BLOCK_SIZE),
+                        300 +(row*BLOCK_SIZE),
+                        BLOCK_SIZE,BLOCK_SIZE,
+                    )
+                    pygame.draw.rect(surface,WHITE,cell_coords)
+
 def game_border(surface):
     pygame.draw.rect(surface, WHITE,
         (BOARD_START_X - BOARD_BORDER, BOARD_START_Y - BOARD_BORDER, 400, 640),
@@ -46,6 +68,7 @@ def render_screen(surface):
         title,
         game_border,
         set_game_info,
+        set_next_block_disp,
     ]
 
     for item in items:
