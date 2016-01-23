@@ -42,7 +42,7 @@ def set_next_block_disp(surface,tetromino=None):
     surface.blit(next_text,(430,250))
 
     if tetromino:
-        pygame.draw.rect(surface,BLACK,(450,300,BLOCK_SIZE*4,BLOCK_SIZE*2))
+        pygame.draw.rect(surface,BLACK,(450,300,BLOCK_SIZE*4,BLOCK_SIZE*4))
         row = -1
         for line in tetromino[0]:
             row += 1

@@ -27,6 +27,6 @@ class BlockPicker():
 
     def pick_block(self):
         self.current = self.next
-        self.next = self.generate
+        self.next = self.generate()
         render.set_next_block_disp(self.surface,self.next)
         return self.current
