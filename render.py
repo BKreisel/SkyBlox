@@ -49,13 +49,13 @@ def set_next_block_disp(surface,tetromino=None):
             col = -1
             for cell in line:
                 col += 1
-                if cell == 1:
+                if cell > 0:
                     cell_coords = (
                         450 + (col*CELL_SIZE),
                         300 +(row*CELL_SIZE),
                         CELL_SIZE,CELL_SIZE,
                     )
-                    pygame.draw.rect(surface,WHITE,cell_coords)
+                    pygame.draw.rect(surface,COLOR_LIST[cell],cell_coords)
 
 def game_border(surface):
     pygame.draw.rect(surface, WHITE,
@@ -91,13 +91,12 @@ def render_block(surface, row, col, block, color = BLACK):
         block_line += 1
 
 def render_gameboard(surface, field):
-    color_list = [BLACK, CYAN, PURPLE, ORANGE, BLUE, YELLOW, GREEN, RED]
 
     pos_y = 0
     for row in field.gameboard:
         pos_x = 0
         for col in row:
-            pygame.draw.rect(surface, color_list[field.get_pos(pos_x, pos_y)],
+            pygame.draw.rect(surface, COLOR_LIST[field.get_pos(pos_x, pos_y)],
                              (BOARD_START_X + pos_x * CELL_SIZE,
                               BOARD_START_Y + pos_y * CELL_SIZE,
                               CELL_SIZE, CELL_SIZE))
@@ -110,4 +109,4 @@ def render_gameboard(surface, field):
             curr_col = cell
 
     render_block(surface, field.block_y, field.block_x, field.block,
-                 color_list[curr_col])
+                 COLOR_LIST[curr_col])
