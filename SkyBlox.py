@@ -50,10 +50,11 @@ def main():
 
             if event.type == USEREVENT + 1:
                 seconds += 1
-                board.block_fall()
+                if board.block_fall() == False:
+                    board.new_block(picker.pick_block())
                 render_gameboard(surface, board)
 
-                print(seconds)
+                #print(seconds)
 
             if event.type == KEYDOWN:
                 '''

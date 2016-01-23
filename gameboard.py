@@ -22,7 +22,17 @@ class Gameboard:
         if(dir == LEFT and self.block_x > 0):
             self.block_x += dir
 
+    def new_block(self,new_tetro):
+        self.tetromino = Block(new_tetro)
+        self.block_x =4
+        self.block_y =0
+
     def block_fall(self):
         if(self.block_y + len(self.tetromino.get_pic())
             < BOARD_CELL_HEIGHT):
             self.block_y += 1
+            return True
+        else:
+            self.add_to_board()
+            return False
+
