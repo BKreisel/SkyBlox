@@ -15,11 +15,10 @@ class Gameboard:
             self.gameboard.append(new)
 
     def move_block(self, dir):
-        if(dir == RIGHT and self.block_x + len(self.block.get_pic()[0])
-        < BOARD_CELL_WIDTH):
+        if(dir == RIGHT and self.did_horiz_collide() is not RIGHT):
             self.block_x += 1
 
-        if(dir == LEFT and self.block_x > 0):
+        if(dir == LEFT and self.did_horiz_collide() is not LEFT):
             self.block_x += dir
 
     def new_block(self,new_tetro):
@@ -53,6 +52,27 @@ class Gameboard:
                     else:
                         if self.gameboard[y+1][x] > 0:
                             return True
+        return False
+
+    def did_horiz_collide(self):
+        tetro = self.block.get_pic()
+        rel_y = -1
+        for cell in tetro:
+            rel_y += 1
+            rel_x = -1
+            for val in cell:
+                rel_x +=1
+                x = self.block_x + rel_x
+                y = self.block_y + rel_y
+                if val > 0:
+                    if x == 0:
+                        return LEFT
+                    if x == 9:
+                        return RIGHT
+                    if self.gameboard[y][x+1] > 0:
+                        return RIGHT
+                    if self.gameboard[y][x-1] > 0:
+                        return LEFT
         return False
 
     def add_to_board(self):
