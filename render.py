@@ -98,16 +98,15 @@ def render_gameboard(surface, field):
     color_list = [BLACK, CYAN, PURPLE, ORANGE, BLUE, YELLOW, RED, GREEN]
     pygame.draw.rect(surface, BLACK, (BOARD_START_X, BOARD_START_Y, 400, 640))
 
-    render_block(surface, field.block_y, field.block_x, field.block)
-    
     pos_y = 0
-    for row in field:
+    for row in field.gameboard:
         pos_x = 0
-        for col in field:
-            pygame.draw.rect(surface, color_list[field.get_pos[pos_y][pos_x]],
+        for col in row:
+            pygame.draw.rect(surface, color_list[field.get_pos(pos_x, pos_y)],
                              (BOARD_START_X + pos_x * CELL_SIZE,
                               BOARD_START_Y + pos_y * CELL_SIZE,
                               CELL_SIZE, CELL_SIZE))
             pos_x += 1
         pos_y += 1
->>>>>>> Stashed changes
+
+    render_block(surface, field.block_y, field.block_x, field.block)

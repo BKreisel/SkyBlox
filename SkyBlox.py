@@ -57,38 +57,6 @@ def main():
                 #print(seconds)
 
             if event.type == KEYDOWN:
-                '''
-                #Temporary code to test the block rotation
-                if event.key == K_1:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_T, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_2:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_I, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_3:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_L, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_4:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_R, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_5:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_O, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_6:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_Z, 0)
-                    render_block(surface, 5, 4, tetromino)
-                if event.key == K_7:
-                    render_block(surface, 5, 4, tetromino, True)
-                    tetromino = Block(BLOCK_S, 0)
-                    render_block(surface, 5, 4, tetromino)
-                '''
-
                 control_block(event, surface, board)
 
         pygame.display.update()
