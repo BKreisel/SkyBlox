@@ -48,7 +48,7 @@ class Gameboard:
                 x = self.block_x + rel_x
                 y = self.block_y + rel_y
 
-                if val = > 0:
+                if val >= 0:
                     self.gameboard[y][x] = val
 
     def print_gameboard(self):
