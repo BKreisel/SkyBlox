@@ -28,13 +28,32 @@ class Gameboard:
         self.block_y =0
 
     def block_fall(self):
-        if(self.block_y + len(self.block.get_pic())
-            < BOARD_CELL_HEIGHT):
+        #self.print_gameboard()
+        #print(self.did_collide())
+        if not self.did_collide():
             self.block_y += 1
             return True
         else:
             self.add_to_board()
             return False
+
+    def did_collide(self):
+        tetro = self.block.get_pic()
+        rel_y = -1
+        for cell in tetro:
+            rel_y += 1
+            rel_x = -1
+            for val in cell:
+                rel_x +=1
+                x = self.block_x + rel_x
+                y = self.block_y + rel_y
+
+                if val >= 0:
+                    if y == 15:
+                        return True
+                    elif self.gameboard[y+1][x] > 0:
+                        return True
+        return False
 
     def add_to_board(self):
 
