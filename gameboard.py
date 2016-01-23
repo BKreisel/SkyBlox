@@ -36,3 +36,21 @@ class Gameboard:
             self.add_to_board()
             return False
 
+    def add_to_board(self):
+
+        rel_y = -1
+        block = self.tetromino.get_pic()
+        for cell in block:
+            rel_y += 1
+            rel_x = -1
+            for val in cell:
+                rel_x +=1
+                x = self.block_x + rel_x
+                y = self.block_y + rel_y
+
+                if val = > 0:
+                    self.gameboard[y][x] = val
+
+    def print_gameboard(self):
+        for line in self.gameboard:
+            print(line)
