@@ -73,3 +73,6 @@ class Gameboard:
     def print_gameboard(self):
         for line in self.gameboard:
             print(line)
+
+    def get_pos(self, x, y):
+        return self.gameboard[y][x]

@@ -42,7 +42,7 @@ def set_next_block_disp(surface,tetromino=None):
     surface.blit(next_text,(430,250))
 
     if tetromino:
-        pygame.draw.rect(surface,BLACK,(450,300,BLOCK_SIZE*4,BLOCK_SIZE*4))
+        pygame.draw.rect(surface,BLACK,(450,300,CELL_SIZE*4,CELL_SIZE*4))
         row = -1
         for line in tetromino[0]:
             row += 1
@@ -51,9 +51,9 @@ def set_next_block_disp(surface,tetromino=None):
                 col += 1
                 if cell == 1:
                     cell_coords = (
-                        450 + (col*BLOCK_SIZE),
-                        300 +(row*BLOCK_SIZE),
-                        BLOCK_SIZE,BLOCK_SIZE,
+                        450 + (col*CELL_SIZE),
+                        300 +(row*CELL_SIZE),
+                        CELL_SIZE,CELL_SIZE,
                     )
                     pygame.draw.rect(surface,WHITE,cell_coords)
 
@@ -88,13 +88,26 @@ def render_block(surface, row, col, block, isClear = False):
         for piece in line:
             if piece != 0:
                 pygame.draw.rect(surface, color,
-                    (BOARD_START_X + (col + block_col) * BLOCK_SIZE,
-                    BOARD_START_Y + (row + block_line) * BLOCK_SIZE,
-                    BLOCK_SIZE, BLOCK_SIZE))
+                    (BOARD_START_X + (col + block_col) * CELL_SIZE,
+                    BOARD_START_Y + (row + block_line) * CELL_SIZE,
+                    CELL_SIZE, CELL_SIZE))
             block_col += 1
         block_line += 1
 
 def render_gameboard(surface, field):
+    color_list = [BLACK, CYAN, PURPLE, ORANGE, BLUE, YELLOW, RED, GREEN]
     pygame.draw.rect(surface, BLACK, (BOARD_START_X, BOARD_START_Y, 400, 640))
 
     render_block(surface, field.block_y, field.block_x, field.block)
+    
+    pos_y = 0
+    for row in field:
+        pos_x = 0
+        for col in field:
+            pygame.draw.rect(surface, color_list[field.get_pos[pos_y][pos_x]],
+                             (BOARD_START_X + pos_x * CELL_SIZE,
+                              BOARD_START_Y + pos_y * CELL_SIZE,
+                              CELL_SIZE, CELL_SIZE))
+            pos_x += 1
+        pos_y += 1
+>>>>>>> Stashed changes
