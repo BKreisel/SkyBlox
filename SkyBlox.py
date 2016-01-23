@@ -18,7 +18,7 @@ def init():
 
 def control_block(event, surface, board):
     if event.key == K_UP or event.key == K_w:
-        board.tetromino.rotate(ROTATE_DIR)
+        board.block.rotate(ROTATE_DIR)
 
     elif event.key == K_RIGHT or event.key == K_d:
         board.move_block(RIGHT)

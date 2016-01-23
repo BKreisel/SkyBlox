@@ -97,4 +97,4 @@ def render_block(surface, row, col, block, isClear = False):
 def render_gameboard(surface, field):
     pygame.draw.rect(surface, BLACK, (BOARD_START_X, BOARD_START_Y, 400, 640))
 
-    render_block(surface, field.block_y, field.block_x, field.tetromino)
+    render_block(surface, field.block_y, field.block_x, field.block)
