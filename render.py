@@ -76,11 +76,7 @@ def render_screen(surface):
     for item in items:
         item(surface)
 
-def render_block(surface, row, col, block, isClear = False):
-    color = WHITE
-    if(isClear):
-        color = BLACK
-
+def render_block(surface, row, col, block, color = BLACK):
     #Loop through and display each sub block
     block_line = 0
     for line in block.get_pic():
@@ -95,8 +91,7 @@ def render_block(surface, row, col, block, isClear = False):
         block_line += 1
 
 def render_gameboard(surface, field):
-    color_list = [BLACK, CYAN, PURPLE, ORANGE, BLUE, YELLOW, RED, GREEN]
-    pygame.draw.rect(surface, BLACK, (BOARD_START_X, BOARD_START_Y, 400, 640))
+    color_list = [BLACK, CYAN, PURPLE, ORANGE, BLUE, YELLOW, GREEN, RED]
 
     pos_y = 0
     for row in field.gameboard:
@@ -109,4 +104,10 @@ def render_gameboard(surface, field):
             pos_x += 1
         pos_y += 1
 
-    render_block(surface, field.block_y, field.block_x, field.block)
+    curr_col = 0
+    for cell in field.block.get_pic()[0]:
+        if cell != 0:
+            curr_col = cell
+
+    render_block(surface, field.block_y, field.block_x, field.block,
+                 color_list[curr_col])
