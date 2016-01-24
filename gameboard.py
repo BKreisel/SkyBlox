@@ -75,6 +75,7 @@ class Gameboard:
                         return LEFT
         return False
 
+    #Lowers all of the lines to replace a destroyed line.
     def drop_board(self,max_row):
         if max_row == 0:
             return
@@ -84,24 +85,20 @@ class Gameboard:
         #Clear the first row
         self.destroy_line(0)
 
-
-
+    #Overwrites a line with 0's
     def destroy_line(self,row):
         for col in range(0, BOARD_CELL_WIDTH):
             self.gameboard[row][col] = 0
         self.drop_board(row)
 
+    #Handles checks for whether a line is full and clearing it if it is
     def clear_line(self):
         for row in range(0,BOARD_CELL_HEIGHT):
             for col in range(0,BOARD_CELL_WIDTH):
                 if self.get_pos(col,row) == 0:
-                    print("Breaking: (" + str(row) + "," + str(col) + ")")
                     break
                 if col == BOARD_CELL_WIDTH - 1:
-                    print("Detroying row: " + str(row))
                     self.destroy_line(row)
-
-
 
     def add_to_board(self):
         rel_y = -1
@@ -116,12 +113,9 @@ class Gameboard:
 
                 if val > 0:
                     self.gameboard[y][x] = val
-        self.print_gameboard()
 
         #if a line is complete, destory it.
         self.clear_line()
-        print()
-        self.print_gameboard()
 
     def print_gameboard(self):
         for line in self.gameboard:
