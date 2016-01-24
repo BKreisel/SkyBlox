@@ -56,6 +56,7 @@ def set_next_block_disp(surface,tetromino=None):
                         CELL_SIZE,CELL_SIZE,
                     )
                     pygame.draw.rect(surface,COLOR_LIST[cell],cell_coords)
+                    pygame.draw.rect(surface, BLACK,cell_coords, 1)
 
 def game_border(surface):
     pygame.draw.rect(surface, WHITE,

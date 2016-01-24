@@ -16,9 +16,6 @@ class Gameboard:
 
     def move_block(self, dir):
 
-        collide = self.did_horiz_collide()
-        print(collide)
-
         if(dir == LEFT and self.did_horiz_collide()[0] is not True):
             self.block_x -= 1
 
