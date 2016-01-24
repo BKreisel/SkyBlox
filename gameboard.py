@@ -2,10 +2,12 @@ from block import Block
 from constants import *
 
 class Gameboard:
-    def __init__(self, first_tetro):
+    def __init__(self, first_tetro,scoreboard):
         self.block_x = 4
         self.block_y = 0
         self.block = Block(first_tetro)
+
+        self.scoreboard = scoreboard
 
         self.gameboard = []
         for i in range (0,BOARD_CELL_HEIGHT):
@@ -98,12 +100,15 @@ class Gameboard:
 
     #Handles checks for whether a line is full and clearing it if it is
     def clear_line(self):
+        destroyed = 0
         for row in range(0,BOARD_CELL_HEIGHT):
             for col in range(0,BOARD_CELL_WIDTH):
                 if self.get_pos(col,row) == 0:
                     break
                 if col == BOARD_CELL_WIDTH - 1:
                     self.destroy_line(row)
+                    destroyed +=1
+        self.scoreboard.lines_up(destroyed)
 
     def add_to_board(self):
         rel_y = -1

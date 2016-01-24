@@ -8,6 +8,7 @@ from constants import *
 from render import *
 from gameboard import Gameboard
 from blockpicker import BlockPicker
+from scoreboard import Scoreboard
 
 def init():
     pygame.init()
@@ -39,7 +40,9 @@ def main():
     picker = BlockPicker(surface)
 
     render_screen(surface)
-    board = Gameboard(picker.get_current())
+
+    scoreboard = Scoreboard(surface)
+    board = Gameboard(picker.get_current(),scoreboard)
     render_gameboard(surface,board)
 
     while True:
