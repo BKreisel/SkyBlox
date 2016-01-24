@@ -15,11 +15,15 @@ class Gameboard:
             self.gameboard.append(new)
 
     def move_block(self, dir):
-        if(dir == RIGHT and self.did_horiz_collide() is not RIGHT):
-            self.block_x += 1
 
-        if(dir == LEFT and self.did_horiz_collide() is not LEFT):
-            self.block_x += dir
+        collide = self.did_horiz_collide()
+        print(collide)
+
+        if(dir == LEFT and self.did_horiz_collide()[0] is not True):
+            self.block_x -= 1
+
+        if(dir == RIGHT and self.did_horiz_collide()[1] is not True ):
+            self.block_x += 1
 
     def new_block(self,new_tetro):
         self.block = Block(new_tetro)
@@ -56,6 +60,7 @@ class Gameboard:
 
     def did_horiz_collide(self):
         tetro = self.block.get_pic()
+        left,right = False,False
         rel_y = -1
         for cell in tetro:
             rel_y += 1
@@ -64,16 +69,19 @@ class Gameboard:
                 rel_x +=1
                 x = self.block_x + rel_x
                 y = self.block_y + rel_y
+
                 if val > 0:
                     if x == 0:
-                        return LEFT
+                        left = True
+                    elif self.gameboard[y][x-1] > 0:
+                        left = True
+
                     if x == 9:
-                        return RIGHT
-                    if self.gameboard[y][x+1] > 0:
-                        return RIGHT
-                    if self.gameboard[y][x-1] > 0:
-                        return LEFT
-        return False
+                        right = True
+                    elif self.gameboard[y][x+1] > 0:
+                        right = True
+
+        return [left,right]
 
     #Lowers all of the lines to replace a destroyed line.
     def drop_board(self,max_row):

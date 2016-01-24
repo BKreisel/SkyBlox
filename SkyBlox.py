@@ -51,6 +51,7 @@ def main():
             if event.type == USEREVENT + 1:
                 seconds += 1
                 if board.block_fall() == False:
+                    pygame.event.clear(KEYDOWN)
                     board.new_block(picker.pick_block())
                 render_gameboard(surface, board)
 
