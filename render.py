@@ -90,6 +90,14 @@ def render_block(surface, row, col, block, color = BLACK):
             block_col += 1
         block_line += 1
 
+def render_borders(surface):
+    for row in range(0,BOARD_CELL_HEIGHT):
+        for col in range(0,BOARD_CELL_WIDTH):
+            pygame.draw.rect(surface, BLACK,
+                             (BOARD_START_X + col * CELL_SIZE,
+                              BOARD_START_Y + row * CELL_SIZE,
+                              CELL_SIZE, CELL_SIZE), 1)
+
 def render_gameboard(surface, field):
 
     pos_y = 0
@@ -110,3 +118,4 @@ def render_gameboard(surface, field):
 
     render_block(surface, field.block_y, field.block_x, field.block,
                  COLOR_LIST[curr_col])
+    render_borders(surface)
