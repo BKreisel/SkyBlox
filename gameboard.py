@@ -75,8 +75,35 @@ class Gameboard:
                         return LEFT
         return False
 
-    def add_to_board(self):
+    def drop_board(self,max_row):
+        if max_row == 0:
+            return
+        for row in range(max_row,0,-1):
+            for col in range(0,BOARD_CELL_WIDTH):
+                self.gameboard[row][col] = self.gameboard[row-1][col]
+        #Clear the first row
+        self.destroy_line(0)
 
+
+
+    def destroy_line(self,row):
+        for col in range(0, BOARD_CELL_WIDTH):
+            self.gameboard[row][col] = 0
+        self.drop_board(row)
+
+    def clear_line(self):
+        for row in range(0,BOARD_CELL_HEIGHT):
+            for col in range(0,BOARD_CELL_WIDTH):
+                if self.get_pos(col,row) == 0:
+                    print("Breaking: (" + str(row) + "," + str(col) + ")")
+                    break
+                if col == BOARD_CELL_WIDTH - 1:
+                    print("Detroying row: " + str(row))
+                    self.destroy_line(row)
+
+
+
+    def add_to_board(self):
         rel_y = -1
         block = self.block.get_pic()
         for cell in block:
@@ -89,7 +116,11 @@ class Gameboard:
 
                 if val > 0:
                     self.gameboard[y][x] = val
-        print(" ")
+        self.print_gameboard()
+
+        #if a line is complete, destory it.
+        self.clear_line()
+        print()
         self.print_gameboard()
 
     def print_gameboard(self):
