@@ -8,5 +8,9 @@ class Block:
     def rotate(self, dir):
         self.orientation = (self.orientation + dir) % len(self.shape)
 
+    def get_next_pic(self, dir):
+        next_tetro = (self.orientation + dir) % len(self.shape)
+        return self.shape[next_tetro]
+
     def get_pic(self):
         return self.shape[self.orientation]

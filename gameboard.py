@@ -39,8 +39,9 @@ class Gameboard:
             self.add_to_board()
             return False
 
-    def did_vert_collide(self):
-        tetro = self.block.get_pic()
+    def did_vert_collide(self,tetro=None):
+        if tetro is None:
+            tetro = self.block.get_pic()
         rel_y = -1
         for cell in tetro:
             rel_y += 1
@@ -50,15 +51,18 @@ class Gameboard:
                 x = self.block_x + rel_x
                 y = self.block_y + rel_y
                 if val > 0:
-                    if y == 15:
+                    if y >= 15 or y < 0:
+                        return True
+                    if x < 0 or x > 9:
                         return True
                     else:
                         if self.gameboard[y+1][x] > 0:
                             return True
         return False
 
-    def did_horiz_collide(self):
-        tetro = self.block.get_pic()
+    def did_horiz_collide(self,tetro=None):
+        if tetro is None:
+            tetro = self.block.get_pic()
         left,right = False,False
         rel_y = -1
         for cell in tetro:
@@ -70,12 +74,12 @@ class Gameboard:
                 y = self.block_y + rel_y
 
                 if val > 0:
-                    if x == 0:
+                    if x <= 0:
                         left = True
                     elif self.gameboard[y][x-1] > 0:
                         left = True
 
-                    if x == 9:
+                    if x >= 9:
                         right = True
                     elif self.gameboard[y][x+1] > 0:
                         right = True
@@ -130,6 +134,14 @@ class Gameboard:
     def print_gameboard(self):
         for line in self.gameboard:
             print(line)
+
+    def do_rotate(self,direction):
+        next_tetro = self.block.get_next_pic(direction)
+        left,right = self.did_horiz_collide(next_tetro)
+        vert = self.did_vert_collide(next_tetro)
+
+        if left is False and right is False and vert is False:
+            self.block.rotate(direction)
 
     def get_pos(self, x, y):
         return self.gameboard[y][x]
